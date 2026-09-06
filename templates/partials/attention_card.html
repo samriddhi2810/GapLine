@@ -1,0 +1,9 @@
+<article class="card attention">
+  <span class="badge badge-attention">Needs Attention</span>
+  {% if receipt.is_reversal %}<span class="badge badge-reversal">Reversal</span>{% endif %}
+  <h3>{{ receipt.symbol }}</h3>
+  <p>{{ receipt.explanation }}</p>
+  <p class="score">{{ receipt.attention_score }}</p>
+  <a class="button" href="{% url 'receipts:detail' receipt.id %}">Open receipt</a>
+  <button class="mark-understood" data-item-id="{{ receipt.watchlist_item_id }}">Mark understood</button>
+</article>

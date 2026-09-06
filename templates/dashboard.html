@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block scripts %}<script defer src="{% static 'js/dashboard.js' %}"></script>{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h1>Dashboard</h1>
+    <p>Replay {{ replay_state.current_index }} at {{ replay_state.current_as_of }}</p>
+  </div>
+  {% if user.is_staff %}<form class="write-form" method="post" action="{% url 'demo:advance' %}">{% csrf_token %}<button class="primary" type="submit">Advance Replay</button></form>{% endif %}
+</section>
+<section class="summary-grid">
+  <div class="metric"><strong>{{ counts.attention }}</strong><span>Needs Attention</span></div>
+  <div class="metric"><strong>{{ counts.verify }}</strong><span>Verify Data</span></div>
+  <div class="metric"><strong>{{ counts.routine }}</strong><span>Routine</span></div>
+  <div class="metric"><strong>{{ counts.no_checkpoint }}</strong><span>No Baseline</span></div>
+</section>
+{% if not items %}
+  <p class="empty">Create a watchlist to begin.</p>
+{% endif %}
+{% if no_checkpoint %}
+<h2>No Baseline</h2>
+<div class="card-grid">
+  {% for item in no_checkpoint %}
+    <article class="card">
+      <h3>{{ item.symbol }}</h3>
+      <p>No baseline yet. Mark this stock understood to establish your baseline.</p>
+      <button class="primary mark-understood" data-item-id="{{ item.id }}">Mark understood</button>
+    </article>
+  {% endfor %}
+</div>
+{% endif %}
+<h2>Needs Attention</h2>
+{% if attention %}<div class="card-grid">{% for receipt in attention %}{% include "partials/attention_card.html" %}{% endfor %}</div>{% else %}<p class="empty">You're caught up. Nothing moved unusually relative to its recent behaviour and benchmark.</p>{% endif %}
+<h2>Verify Data</h2>
+{% if verify %}<div class="card-grid">{% for receipt in verify %}{% include "partials/verify_card.html" %}{% endfor %}</div>{% else %}<p class="empty">Gapline does not currently have sufficiently unreliable data waiting for review.</p>{% endif %}
+<details open>
+  <summary>Routine</summary>
+  {% if routine %}<div class="card-grid">{% for receipt in routine %}{% include "partials/routine_card.html" %}{% endfor %}</div>{% else %}<p class="empty">No routine items yet.</p>{% endif %}
+</details>
+{% endblock %}

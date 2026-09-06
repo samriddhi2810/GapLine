@@ -1,0 +1,3 @@
+# Gapline Pitch
+
+Normal watchlists mainly show numbers: price, percent move, and maybe a red or green color. Gapline remembers what an investor explicitly marked understood by creating a server-side checkpoint. When simulated market time advances, Gapline compares each stock against that checkpoint, normalizes movement against the stock's own recent volatility, and checks whether it diverged from its benchmark. Every surfaced item has a transparent change receipt with the arithmetic behind the classification. Bad, stale, conflicting, or corporate-action affected data is suppressed before ranking. A deterministic replay makes the hackathon demo reproducible without live APIs, AI, predictions, or investment advice.

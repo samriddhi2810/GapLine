@@ -1,0 +1,21 @@
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
+
+DEMO_RANDOM_SEED = 41729
+PROVIDER_REPLAY = "DemoReplayProvider"
+PROVIDER_CONFLICT = "DemoConflictProvider"
+MAX_REPLAY_INDEX = 4
+REPLAY_START = datetime(2026, 8, 3, 15, 30, tzinfo=ZoneInfo("Asia/Kolkata"))
+TRADING_DAY = timedelta(days=1)
+
+SYMBOL_BENCHMARKS = {
+    "INFY": "NIFTYIT",
+    "TCS": "NIFTYIT",
+    "RELIANCE": "NIFTY50",
+    "HDFCBANK": "NIFTYBANK",
+    "ICICIBANK": "NIFTYBANK",
+    "TATAMOTORS": "NIFTYAUTO",
+}
+SUPPORTED_SYMBOLS = tuple(SYMBOL_BENCHMARKS.keys())
+BENCHMARK_SYMBOLS = ("NIFTY50", "NIFTYIT", "NIFTYBANK", "NIFTYAUTO")
+ALL_MARKET_SYMBOLS = SUPPORTED_SYMBOLS + BENCHMARK_SYMBOLS

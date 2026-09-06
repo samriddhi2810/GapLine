@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gapline{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <script defer src="{% static 'js/csrf.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{% url 'dashboard:home' %}">Gapline</a>
+    <nav>
+      {% if user.is_authenticated %}
+        <a href="{% url 'dashboard:home' %}">Dashboard</a>
+        <a href="{% url 'watchlists:page' %}">Watchlist</a>
+        {% if user.is_staff %}<a href="{% url 'demo:controls' %}">Demo Controls</a>{% endif %}
+        <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit">Logout</button></form>
+      {% endif %}
+    </nav>
+  </header>
+  {% if user.is_authenticated %}
+    <div class="demo-banner">Simulated deterministic market data. No predictions, advice, news, or live-market dependency.</div>
+  {% endif %}
+  <main class="shell">{% block content %}{% endblock %}</main>
+</body>
+</html>

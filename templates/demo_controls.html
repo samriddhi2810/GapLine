@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block scripts %}<script defer src="{% static 'js/demo.js' %}"></script>{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div><h1>Demo Controls</h1><p>Replay {{ replay_state.current_index }} at {{ replay_state.current_as_of }}</p></div>
+</section>
+<div class="card-grid">
+  <form class="card write-form" method="post" action="{% url 'demo:advance' %}">{% csrf_token %}<h3>Advance one day</h3><p>Move deterministic replay forward without creating checkpoints.</p><button class="primary" type="submit">Advance</button></form>
+  <form class="card write-form" method="post" action="{% url 'demo:reset' %}">{% csrf_token %}<h3>Reset demo</h3><p>Restore seeded users, watchlists, market data, and replay clock.</p><button type="submit">Reset</button></form>
+</div>
+{% endblock %}

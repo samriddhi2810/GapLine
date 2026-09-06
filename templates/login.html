@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Login - Gapline{% endblock %}
+{% block content %}
+<section class="login-panel">
+  <h1>Gapline</h1>
+  <p>Sign in with a demo account to inspect checkpoint-based market changes.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="primary" type="submit">Login</button>
+  </form>
+  <p class="muted">Demo: demo / gapline-demo</p>
+</section>
+{% endblock %}

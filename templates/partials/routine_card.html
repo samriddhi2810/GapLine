@@ -1,0 +1,7 @@
+<article class="card routine">
+  <span class="badge badge-routine">Routine</span>
+  <h3>{{ receipt.symbol }}</h3>
+  <p>{{ receipt.explanation }}</p>
+  <a class="button" href="{% url 'receipts:detail' receipt.id %}">Open receipt</a>
+  <button class="mark-understood" data-item-id="{{ receipt.watchlist_item_id }}">Mark understood</button>
+</article>

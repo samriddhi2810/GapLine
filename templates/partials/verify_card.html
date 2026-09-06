@@ -1,0 +1,7 @@
+<article class="card verify">
+  <span class="badge badge-verify">Verify Data</span>
+  <h3>{{ receipt.symbol }}</h3>
+  <p>Gapline does not currently have sufficiently reliable data to assess this stock.</p>
+  <p>{{ receipt.explanation }}</p>
+  <a class="button" href="{% url 'receipts:detail' receipt.id %}">Open receipt</a>
+</article>

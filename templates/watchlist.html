@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block scripts %}<script defer src="{% static 'js/watchlist.js' %}"></script>{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div><h1>{{ watchlist.name }}</h1><p>Add stocks and establish explicit baselines.</p></div>
+</section>
+<form id="add-stock-form" class="inline-form">
+  <select name="symbol">{% for symbol in symbols %}<option value="{{ symbol }}">{{ symbol }}</option>{% endfor %}</select>
+  <button class="primary" type="submit">Add stock</button>
+</form>
+{% if watchlist.items.all %}
+<table>
+  <thead><tr><th>Symbol</th><th>Benchmark</th><th>Actions</th></tr></thead>
+  <tbody>
+  {% for item in watchlist.items.all %}
+    <tr>
+      <td>{{ item.symbol }}</td>
+      <td>{{ item.benchmark_symbol }}</td>
+      <td class="actions">
+        <button class="mark-understood" data-item-id="{{ item.id }}">Mark understood</button>
+        <form method="post" action="{% url 'watchlists:remove_stock' item.id %}">{% csrf_token %}<button type="submit">Remove</button></form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty">Add a stock to start tracking changes.</p>
+{% endif %}
+{% endblock %}

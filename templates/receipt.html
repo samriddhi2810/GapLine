@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="page-head">
+  <div><h1>{{ receipt.symbol }} Change Receipt</h1><p>Immutable replay {{ receipt.replay_index }} snapshot.</p></div>
+  <span class="badge badge-{{ receipt.classification|lower }}">{{ receipt.classification }}</span>
+</section>
+<article class="receipt">
+  <h2>Checkpoint to Current</h2>
+  <dl>
+    <dt>Checkpoint price</dt><dd>{{ receipt.checkpoint_price }} at {{ receipt.checkpoint_as_of }}</dd>
+    <dt>Current price</dt><dd>{{ receipt.current_price }} at {{ receipt.current_as_of }}</dd>
+    <dt>Received at</dt><dd>{{ receipt.current_received_at }}</dd>
+    <dt>Quality</dt><dd>{{ receipt.quality_status }}</dd>
+  </dl>
+  <h2>Arithmetic</h2>
+  <table>
+    <tr><th>Stock return</th><td>{{ receipt.stock_return|floatformat:4 }}</td></tr>
+    <tr><th>Benchmark return</th><td>{{ receipt.benchmark_return|floatformat:4 }}</td></tr>
+    <tr><th>Residual return</th><td>{{ receipt.residual_return|floatformat:4 }}</td></tr>
+    <tr><th>Own expected gap volatility</th><td>{{ receipt.expected_gap_volatility|floatformat:4 }}</td></tr>
+    <tr><th>Own surprise ratio</th><td>{{ receipt.own_surprise_ratio|floatformat:4 }}</td></tr>
+    <tr><th>Own component</th><td>{{ receipt.own_component_points|floatformat:2 }} / 45</td></tr>
+    <tr><th>Residual expected volatility</th><td>{{ receipt.expected_residual_gap_volatility|floatformat:4 }}</td></tr>
+    <tr><th>Benchmark component</th><td>{{ receipt.benchmark_component_points|floatformat:2 }} / 55</td></tr>
+    <tr><th>Score</th><td>{{ receipt.attention_score|default:"Suppressed" }}</td></tr>
+    <tr><th>Reversal</th><td>{{ receipt.is_reversal }}</td></tr>
+  </table>
+  <p>{{ receipt.explanation }}</p>
+  <button class="primary mark-understood" data-item-id="{{ receipt.watchlist_item_id }}">Mark understood</button>
+</article>
+<script defer src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

@@ -9,6 +9,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "dev-only-gapline-secret-key")
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 USING_SQLITE = os.getenv("GAPLINE_SQLITE", "False").lower() == "true"
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost,testserver").split(",") if host.strip()]
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if origin.strip()]
 if os.getenv("RAILWAY_PUBLIC_DOMAIN"):
     ALLOWED_HOSTS.append(os.getenv("RAILWAY_PUBLIC_DOMAIN"))
 

@@ -71,11 +71,11 @@ else:
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', 'gapline'),
-        'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
-        'PORT': os.getenv('DB_PORT', '3306'),
+        'NAME': os.getenv('DB_NAME') or os.getenv('MYSQLDATABASE', 'gapline'),
+        'USER': os.getenv('DB_USER') or os.getenv('MYSQLUSER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD') or os.getenv('MYSQLPASSWORD', ''),
+        'HOST': os.getenv('DB_HOST') or os.getenv('MYSQLHOST', '127.0.0.1'),
+        'PORT': os.getenv('DB_PORT') or os.getenv('MYSQLPORT', '3306'),
         'OPTIONS': {'charset': 'utf8mb4'},
         'TEST': {'NAME': os.getenv('TEST_DB_NAME', 'test_gapline')},
         }

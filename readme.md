@@ -196,3 +196,8 @@ python manage.py reset_demo
 ## Known Limitations
 
 The market is deterministic synthetic fixture data. There is no live ingestion, no background job runner, no charting package, no investment advice, and no production observability stack. A running local MySQL server is required for normal migration and test execution with the default settings.
+```
+
+## Known Limitations
+
+The market is deterministic synthetic fixture data. There is no live ingestion, no background job runner, no charting package, no investment advice, and no production observability stack. A running local MySQL server is required for normal migration and test execution with the default settings.
